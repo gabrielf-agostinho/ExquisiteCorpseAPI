@@ -9,7 +9,8 @@ namespace ExquisiteCorpseAPI.Utils
 
       return [.. File.ReadAllLines(path)
         .Where(x => !string.IsNullOrWhiteSpace(x))
-        .Select(x => x.Trim())];
+        .Select(x => x.Trim())
+        .Distinct()];
     }
   }
 }
