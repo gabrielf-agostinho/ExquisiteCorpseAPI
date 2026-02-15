@@ -11,31 +11,48 @@ namespace ExquisiteCorpseAPI.Repositories
 
     public async Task<string> Generate(Languages languages)
     {
-      var subject = await _context.Subjects
+      var subjects = await _context.Subjects
         .Where(x => x.LanguageId == (int)languages)
-        .OrderBy(x => EF.Functions.Random())
-        .Select(x => x.Text)
-        .FirstOrDefaultAsync();
+        .ToListAsync();
 
-      var adjective = await _context.Adjectives
+      var adjectives = await _context.Adjectives
         .Where(x => x.LanguageId == (int)languages)
-        .OrderBy(x => EF.Functions.Random())
-        .Select(x => x.Text)
-        .FirstOrDefaultAsync();
+        .ToListAsync();
 
-      var verb = await _context.Verbs
+      var verbs = await _context.Verbs
         .Where(x => x.LanguageId == (int)languages)
-        .OrderBy(x => EF.Functions.Random())
-        .Select(x => x.Text)
-        .FirstOrDefaultAsync();
+        .ToListAsync();
 
-      var objectWord = await _context.ObjectWords
+      var objectWords = await _context.ObjectWords
         .Where(x => x.LanguageId == (int)languages)
-        .OrderBy(x => EF.Functions.Random())
-        .Select(x => x.Text)
-        .FirstOrDefaultAsync();
+        .ToListAsync();
+
+      var subject = WeightedRandom(subjects, x => x.Weight)?.Text;
+      var adjective = WeightedRandom(adjectives, x => x.Weight)?.Text;
+      var verb = WeightedRandom(verbs, x => x.Weight)?.Text;
+      var objectWord = WeightedRandom(objectWords, x => x.Weight)?.Text;
 
       return $"{subject} {adjective} {verb} {objectWord}";
+    }
+
+    private static T? WeightedRandom<T>(List<T> items, Func<T, int> weightSelector)
+    {
+      if (items.Count == 0)
+        return default;
+
+      var totalWeight = items.Sum(weightSelector);
+      var random = Random.Shared.Next(1, totalWeight + 1);
+      var cumulative = 0;
+
+      foreach (var item in items)
+      {
+        cumulative += weightSelector(item);
+
+        if (random <= cumulative)
+          return item;
+      }
+
+      return default;
     }
   }
 }
