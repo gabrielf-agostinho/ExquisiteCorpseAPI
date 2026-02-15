@@ -13,7 +13,7 @@ namespace ExquisiteCorpseAPI.Repositories
     {
       return await _context
         .Languages
-        .Where(x => x.Acronym!.ToLower() == acronym.ToLower())
+        .Where(x => x.Acronym!.ToLower() == acronym.ToLower() && x.IsActive)
         .FirstOrDefaultAsync();
     }
   }

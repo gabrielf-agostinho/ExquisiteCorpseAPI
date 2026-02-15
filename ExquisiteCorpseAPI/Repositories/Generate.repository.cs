@@ -12,19 +12,19 @@ namespace ExquisiteCorpseAPI.Repositories
     public async Task<string> Generate(Languages languages)
     {
       var subjects = await _context.Subjects
-        .Where(x => x.LanguageId == (int)languages)
+        .Where(x => x.LanguageId == (int)languages && x.IsActive)
         .ToListAsync();
 
       var adjectives = await _context.Adjectives
-        .Where(x => x.LanguageId == (int)languages)
+        .Where(x => x.LanguageId == (int)languages && x.IsActive)
         .ToListAsync();
 
       var verbs = await _context.Verbs
-        .Where(x => x.LanguageId == (int)languages)
+        .Where(x => x.LanguageId == (int)languages && x.IsActive)
         .ToListAsync();
 
       var objectWords = await _context.ObjectWords
-        .Where(x => x.LanguageId == (int)languages)
+        .Where(x => x.LanguageId == (int)languages && x.IsActive)
         .ToListAsync();
 
       var subject = WeightedRandom(subjects, x => x.Weight)?.Text;
