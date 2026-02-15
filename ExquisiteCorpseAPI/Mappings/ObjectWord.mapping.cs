@@ -15,6 +15,7 @@ namespace ExquisiteCorpseAPI.Mappings
         .HasOne(x => x.Language)
         .WithMany(x => x.ObjectWords)
         .HasForeignKey(x => x.LanguageId)
+        .IsRequired()
         .OnDelete(DeleteBehavior.Cascade);
     }
   }

@@ -27,12 +27,14 @@ namespace ExquisiteCorpseAPI.Repositories
         .Where(x => x.LanguageId == (int)languages && x.IsActive)
         .ToListAsync();
 
-      var subject = WeightedRandom(subjects, x => x.Weight)?.Text;
-      var adjective = WeightedRandom(adjectives, x => x.Weight)?.Text;
+      var subject = WeightedRandom(subjects, x => x.Weight);
+
+      var adjective = WeightedRandom(adjectives.Where(x => x.GenderId == subject?.GenderId || x.GenderId == (int)Genders.NEUTRAL).ToList(), x => x.Weight)?.Text;
+
       var verb = WeightedRandom(verbs, x => x.Weight)?.Text;
       var objectWord = WeightedRandom(objectWords, x => x.Weight)?.Text;
 
-      return $"{subject} {adjective} {verb} {objectWord}";
+      return $"{subject?.Text} {adjective} {verb} {objectWord}";
     }
 
     private static T? WeightedRandom<T>(List<T> items, Func<T, int> weightSelector)

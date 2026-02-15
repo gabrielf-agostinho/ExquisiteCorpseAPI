@@ -1,3 +1,4 @@
+using ExquisiteCorpseAPI.Enums;
 using ExquisiteCorpseAPI.Models;
 
 namespace ExquisiteCorpseAPI.Extensions
@@ -6,13 +7,45 @@ namespace ExquisiteCorpseAPI.Extensions
   {
     public static Language AddSubjects(this Language language, params string[] words)
     {
-      language.Subjects = Generate<Subject>(language.Id, words);
+      language.Subjects = [.. Generate<Subject>(language.Id, words)
+        .Select(subject =>
+        {
+          if (language.Id == (int)Languages.BRAZILIAN_PORTUGUESE)
+          {
+            var firstChar = char.ToLowerInvariant(subject.Text?[0] ?? '\0');
+
+            subject.GenderId = firstChar switch
+            {
+              'o' => (int)Genders.MALE,
+              'a' => (int)Genders.FEMALE,
+              _ => (int)Genders.NEUTRAL
+            };
+          }
+
+          return subject;
+        })];
+
       return language;
     }
 
     public static Language AddAdjectives(this Language language, params string[] words)
     {
-      language.Adjectives = Generate<Adjective>(language.Id, words);
+      language.Adjectives = [.. Generate<Adjective>(language.Id, words)
+        .Select(adjective =>
+        {
+          if (language.Id == (int)Languages.BRAZILIAN_PORTUGUESE)
+          {
+            adjective.GenderId = adjective.Text[^1] switch
+            {
+              'o' => (int)Genders.MALE,
+              'a' => (int)Genders.FEMALE,
+              _ => (int)Genders.NEUTRAL
+            };
+          }
+
+          return adjective;
+        })];
+
       return language;
     }
 

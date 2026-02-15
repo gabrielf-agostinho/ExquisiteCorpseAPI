@@ -15,7 +15,14 @@ namespace ExquisiteCorpseAPI.Mappings
         .HasOne(x => x.Language)
         .WithMany(x => x.Adjectives)
         .HasForeignKey(x => x.LanguageId)
+        .IsRequired()
         .OnDelete(DeleteBehavior.Cascade);
+
+      builder
+        .HasOne(x => x.Gender)
+        .WithMany(x => x.Adjectives)
+        .HasForeignKey(x => x.GenderId)
+        .IsRequired();
     }
   }
 }

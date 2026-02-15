@@ -1,0 +1,113 @@
+o gato
+a mulher
+o homem
+o artista
+o programador
+a criança
+o poeta
+a sombra
+o viajante
+o desconhecido
+o cachorro
+a menina
+o menino
+a professora
+o professor
+o aluno
+a aluna
+o médico
+a médica
+o engenheiro
+a engenheira
+o músico
+a musicista
+o cantor
+a cantora
+o escritor
+a escritora
+o pintor
+a pintora
+o ator
+a atriz
+o atleta
+a jogadora
+o chefe
+a chefe
+o estudante
+a estudante
+o vizinho
+a vizinha
+o amigo
+a amiga
+o inimigo
+a inimiga
+o cientista
+a cientista
+o viajante
+a viajante
+o sonhador
+a sonhadora
+o poeta
+a poetisa
+o ladrão
+a ladra
+o herói
+a heroína
+o rei
+a rainha
+o príncipe
+a princesa
+o artista
+a artista
+o comerciante
+a comerciante
+o motorista
+a motorista
+o cozinheiro
+a cozinheira
+o escritor
+a escritora
+o aventureiro
+a aventureira
+o explorador
+a exploradora
+o capitão
+a capitã
+o inventor
+a inventora
+o músico
+a musicista
+o bailarino
+a bailarina
+o piloto
+a piloto
+o jogador
+a jogadora
+o maestro
+a maestrina
+o filósofo
+a filósofa
+o viajante
+a viajante
+o artista de rua
+a artista de rua
+o cientista maluco
+a cientista maluca
+o mendigo
+a mendiga
+o sonhador
+a sonhadora
+o viajante solitário
+a viajante solitária
+o guardião
+a guardiã
+o fantasma
+a fantasma
+o viajante noturno
+a viajante noturna
+o professor de música
+a professora de música
+o escritor desconhecido
+a escritora desconhecida
+o cientista brilhante
+a cientista brilhante
