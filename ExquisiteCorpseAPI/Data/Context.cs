@@ -1,6 +1,7 @@
 using ExquisiteCorpseAPI.Enums;
 using ExquisiteCorpseAPI.Extensions;
 using ExquisiteCorpseAPI.Models;
+using ExquisiteCorpseAPI.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExquisiteCorpseAPI.Data
@@ -38,16 +39,17 @@ namespace ExquisiteCorpseAPI.Data
 
     private static void SeedBrazilianPortuguese(Context context)
     {
+      var basePath = Path.Combine(AppContext.BaseDirectory, "Seeds", "pt-BR");
       var language = new Language
       {
         Id = (int)Languages.BRAZILIAN_PORTUGUESE,
         Name = "Português Brasileiro",
         Acronym = "pt-BR",
       }
-      .AddSubjects("o gato", "a mulher", "o homem", "o artista", "o programador", "a criança", "o poeta", "a sombra", "o viajante", "o desconhecido")
-      .AddAdjectives("feliz", "triste", "rápido", "lento", "estranho", "silencioso", "barulhento", "brilhante", "sombrio", "antigo", "moderno", "quente", "frio")
-      .AddVerbs("observa", "destrói", "cria", "encontra", "persegue", "abraça", "evita", "imagina", "constrói", "questiona")
-      .AddObjects("o mundo", "um sonho", "a realidade", "o silêncio", "a escuridão", "a luz", "o passado", "o futuro", "o vazio", "a memória");
+      .AddSubjects(SeedReader.ReadLines(Path.Combine(basePath, "subjects.txt")))
+      .AddAdjectives(SeedReader.ReadLines(Path.Combine(basePath, "adjectives.txt")))
+      .AddVerbs(SeedReader.ReadLines(Path.Combine(basePath, "verbs.txt")))
+      .AddObjects(SeedReader.ReadLines(Path.Combine(basePath, "objects.txt")));
 
       context.Add(language);
     }

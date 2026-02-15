@@ -1,0 +1,13 @@
+feliz
+triste
+rápido
+lento
+estranho
+silencioso
+barulhento
+brilhante
+sombrio
+antigo
+moderno
+quente
+frio
